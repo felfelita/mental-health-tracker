@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-8+76q&#sj!(z60(u3j8=2a3e18rofm89^-tyv1h&tu@js9k=p=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "felita-zahra-mentalhealthtracker.pbp.cs.ui.ac.id"]
 
 
 # Application definition
@@ -122,6 +122,3 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-...
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
-...
