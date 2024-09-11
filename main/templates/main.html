@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-...
 {% if not mood_entries %}
 <p>Belum ada data mood pada mental health tracker.</p>
 {% else %}
@@ -31,6 +30,8 @@
   <button>Add New Mood Entry</button>
 </a>
 {% endblock content %}
+
+{% block content %}
 <h1>Mental Health Tracker</h1>
 
 <h5>NPM: </h5>
