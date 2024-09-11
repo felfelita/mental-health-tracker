@@ -1,0 +1,48 @@
+{% extends 'base.html' %} 
+{% block content %}
+{% if not mood_entries %}
+<p>Belum ada data mood pada mental health tracker.</p>
+{% else %}
+<table>
+  <tr>
+    <th>Mood Name</th>
+    <th>Time</th>
+    <th>Feeling</th>
+    <th>Mood Intensity</th>
+  </tr>
+
+  {% comment %} Berikut cara memperlihatkan data mood di bawah baris ini 
+  {% endcomment %} 
+  {% for mood_entry in mood_entries %}
+  <tr>
+    <td>{{mood_entry.mood}}</td>
+    <td>{{mood_entry.time}}</td>
+    <td>{{mood_entry.feelings}}</td>
+    <td>{{mood_entry.mood_intensity}}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
+
+<br />
+
+<a href="{% url 'main:create_mood_entry' %}">
+  <button>Add New Mood Entry</button>
+</a>
+{% endblock content %}
+<h1>Add New Mood Entry</h1>
+
+<form method="POST">
+  {% csrf_token %}
+  <table>
+    {{ form.as_table }}
+    <tr>
+      <td></td>
+      <td>
+        <input type="submit" value="Add Mood Entry" />
+      </td>
+    </tr>
+  </table>
+</form>
+
+{% endblock %}
