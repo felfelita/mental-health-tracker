@@ -79,18 +79,7 @@
 
 </div>
 <script>
-  function addMoodEntry() {
-    fetch("{% url 'main:add_mood_entry_ajax' %}", {
-      method: "POST",
-      body: new FormData(document.querySelector('#moodEntryForm')),
-    })
-    .then(response => refreshMoodEntries())
-
-    document.getElementById("moodEntryForm").reset(); 
-    document.querySelector("[data-modal-toggle='crudModal']").click();
-
-    return false;
-  }
+  
   async function getMoodEntries(){
       return fetch("{% url 'main:show_json' %}").then((res) => res.json())
   }
@@ -164,39 +153,52 @@
             `;
         });
     }
-  const modal = document.getElementById('crudModal');
-  const modalContent = document.getElementById('crudModalContent');
-
-  function showModal() {
-      const modal = document.getElementById('crudModal');
-      const modalContent = document.getElementById('crudModalContent');
-
-      modal.classList.remove('hidden'); 
-      setTimeout(() => {
-        modalContent.classList.remove('opacity-0', 'scale-95');
-        modalContent.classList.add('opacity-100', 'scale-100');
-      }, 50); 
-  }
-
-  function hideModal() {
-      const modal = document.getElementById('crudModal');
-      const modalContent = document.getElementById('crudModalContent');
-
-      modalContent.classList.remove('opacity-100', 'scale-100');
-      modalContent.classList.add('opacity-0', 'scale-95');
-
-      setTimeout(() => {
-        modal.classList.add('hidden');
-      }, 150); 
-  }
-
-  document.getElementById("cancelButton").addEventListener("click", hideModal);
-  document.getElementById("closeModalBtn").addEventListener("click", hideModal);
+  
   document.getElementById("mood_entry_cards").className = classNameString;
   document.getElementById("mood_entry_cards").innerHTML = htmlString;
-  document.getElementById("submitMoodEntry").onclick = addMoodEntry
 
 }
 refreshMoodEntries();
+const modal = document.getElementById('crudModal');
+const modalContent = document.getElementById('crudModalContent');
+
+function showModal() {
+    const modal = document.getElementById('crudModal');
+    const modalContent = document.getElementById('crudModalContent');
+
+    modal.classList.remove('hidden'); 
+    setTimeout(() => {
+      modalContent.classList.remove('opacity-0', 'scale-95');
+      modalContent.classList.add('opacity-100', 'scale-100');
+    }, 50); 
+}
+
+function hideModal() {
+    const modal = document.getElementById('crudModal');
+    const modalContent = document.getElementById('crudModalContent');
+
+    modalContent.classList.remove('opacity-100', 'scale-100');
+    modalContent.classList.add('opacity-0', 'scale-95');
+
+    setTimeout(() => {
+      modal.classList.add('hidden');
+    }, 150); 
+}
+
+document.getElementById("cancelButton").addEventListener("click", hideModal);
+document.getElementById("closeModalBtn").addEventListener("click", hideModal);
+function addMoodEntry() {
+    fetch("{% url 'main:add_mood_entry_ajax' %}", {
+      method: "POST",
+      body: new FormData(document.querySelector('#moodEntryForm')),
+    })
+    .then(response => refreshMoodEntries())
+
+    document.getElementById("moodEntryForm").reset(); 
+    document.querySelector("[data-modal-toggle='crudModal']").click();
+
+    return false;
+  }
+  document.getElementById("submitMoodEntry").onclick = addMoodEntry
 </script>
 {% endblock content %}
